@@ -10,8 +10,16 @@
       <a routerLink="/projects" class="btn btn-outline-secondary">View Work</a>
     </div>
     <div class="mt-4 text-secondary">
-      <i class="bi bi-github me-3"></i>
-      <i class="bi bi-linkedin me-3"></i>
-      <i class="bi bi-envelope"></i>
+      <div class="mt-4 text-secondary">
+        <a [href]="links.github" target="_blank" rel="noopener">
+          <i class="bi bi-github me-3"></i>
+        </a>
+        <a [href]="links.linkedin" target="_blank" rel="noopener">
+          <i class="bi bi-linkedin me-3"></i>
+        </a>
+        <a [href]="links.email">
+          <i class="bi bi-envelope"></i>
+        </a>
+      </div>
     </div>
   </section>
