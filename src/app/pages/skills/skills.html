@@ -1,0 +1,24 @@
+<section class="container py-5">
+  <div class="text-center mb-4">
+    <span class="badge bg-transparent border text-uppercase small">Skills & Technologies</span>
+    <h2 class="display-6 fw-semibold mt-3">Technical Expertise</h2>
+    <p class="text-secondary">A comprehensive toolkit for building modern, performant applications</p>
+  </div>
+
+  <!-- 4 category cards -->
+  <div class="row g-4 mb-5">
+    <div class="col-12 col-md-6 col-xl-3" *ngFor="let c of categories">
+      <app-rec-card [index]="c.index" [title]="c.title" [items]="c.items"></app-rec-card>
+    </div>
+  </div>
+
+  <!-- process bar -->
+  <div class="process container-sm px-0">
+    <div class="inner d-flex flex-wrap justify-content-center gap-3 p-4 border rounded">
+      <ng-container *ngFor="let s of steps; let last = last">
+        <button class="btn btn-outline-primary btn-sm">{{ s }}</button>
+        <span *ngIf="!last" class="arrow">→</span>
+      </ng-container>
+    </div>
+  </div>
+</section>

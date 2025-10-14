@@ -1,0 +1,35 @@
+<section class="container py-5">
+  <span class="badge bg-transparent border text-uppercase small">About Me</span>
+
+  <div class="row g-4 align-items-start mt-3">
+    <div class="col-lg-6">
+      <h2 class="display-6 fw-semibold mb-3">
+        Building the Future, <span class="text-gradient">One Line at a Time</span>
+      </h2>
+
+      <p class="text-secondary">
+        With a passion for creating elegant solutions to complex problems, I specialize in
+        full-stack development with a focus on modern JavaScript frameworks and scalable architectures.
+      </p>
+      <p class="text-secondary">
+        My journey has equipped me with a diverse skill set spanning frontend frameworks, backend services,
+        data pipelines, and cloud infrastructure.
+      </p>
+      <p class="text-secondary mb-0">
+        When I’m not coding, I’m exploring new technologies, contributing to open-source, or sharing knowledge.
+      </p>
+    </div>
+
+    <div class="col-lg-6">
+      <div class="row g-3">
+        <div class="col-12 col-md-6" *ngFor="let f of features">
+          <app-square-card
+            [icon]="f.icon"
+            [title]="f.title"
+            [description]="f.description">
+          </app-square-card>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

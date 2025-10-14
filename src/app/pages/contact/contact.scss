@@ -1,0 +1,32 @@
+.icon-pill {
+  width: 44px; height: 44px;
+  border-radius: .5rem;
+  display: grid; place-items: center;
+  font-size: 1.25rem;
+  background: rgba(34,211,238,.12);
+  color: var(--bs-primary);
+}
+
+.status-dot {
+  width: 10px; height: 10px; border-radius: 999px;
+  background: #22c55e;
+  box-shadow: 0 0 0 4px rgba(34,197,94,.15);
+}
+
+.form-card {
+  border-radius: .75rem;
+}
+
+.invalid-msg {
+  margin-top: .35rem;
+  color: #fca5a5;
+  font-size: .875rem;
+  display: block;
+}
+
+.form-control, .form-select, .form-control:focus {
+  background-color: rgba(255,255,255,.02);
+  border-color: rgba(148,163,184,.25);
+  color: var(--bs-body-color);
+}
+.form-control::placeholder { color: rgba(148,163,184,.7); }
