@@ -1,20 +1,24 @@
 <section class="container py-4">
     <h2 class="mb-4">Projects</h2>
     <div class="row g-4">
-      <div class="col-12 col-sm-6 col-lg-4" *ngFor="let p of projects">
-        <div class="card h-100">
-          <img [src]="p.image || '/assets/placeholder.png'" class="card-img-top" alt="">
-          <div class="card-body">
-            <h5 class="card-title mb-1">{{ p.title }}</h5>
-            <p class="card-text text-secondary small">{{ p.summary }}</p>
-            <div class="d-flex gap-2">
-              <a [routerLink]="['/projects', p.slug]" class="btn btn-sm btn-primary">Details</a>
-              <a *ngIf="p.repo" [href]="p.repo" target="_blank" class="btn btn-sm btn-outline-secondary">
-                <i class="bi bi-github me-1"></i>Code
-              </a>
+      @for (p of projects; track p; let i = $index; let last = $last) {
+          <div class="col-12 col-sm-6 col-lg-4">
+            <div class="card h-100">
+              <img [src]="p.image || '/assets/placeholder.png'" class="card-img-top" alt="">
+              <div class="card-body">
+                <h5 class="card-title mb-1">{{ p.title }}</h5>
+                <p class="card-text text-secondary small">{{ p.summary }}</p>
+                <div class="d-flex gap-2">
+                  <a [routerLink]="['/projects', p.slug]" class="btn btn-sm btn-primary">Details</a>
+                  @if (p.repo) {
+                    <a [href]="p.repo" target="_blank" class="btn btn-sm btn-outline-secondary">
+                      <i class="bi bi-github me-1"></i>Code
+                    </a>
+                  }
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
+        }
     </div>
   </section>

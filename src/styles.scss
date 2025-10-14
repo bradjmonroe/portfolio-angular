@@ -1,6 +1,7 @@
 /* ===== Bootstrap variables ===== */
 $primary: #22d3ee;      // teal
 $secondary: #3b82f6;    // blue
+$tertiary: #6c757d;     // grey
 $body-color: #e5e7eb;
 $body-bg: #0b0f14;
 
@@ -14,7 +15,11 @@ $theme-colors: (
 );
 
 /* ===== Bootstrap ===== */
-@use "bootstrap/scss/bootstrap";
+@use "bootstrap/scss/bootstrap" with (
+  $primary: $primary,
+  // You can configure others here too:
+  $secondary: $tertiary
+);
 
 /* Bootstrap Icons */
 @use "bootstrap-icons/font/bootstrap-icons.css";

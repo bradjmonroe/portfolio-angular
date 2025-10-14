@@ -1,1 +1,15 @@
-<p>rec-card works!</p>
+<div class="card h-100 border-0 card-soft">
+  <div class="card-body">
+    <div class="d-flex align-items-center gap-2 mb-3">
+        <span class="index-badge">{{ index | number:'2.0' }}</span>
+        <h6 class="mb-0">{{ title }}</h6>
+      </div>
+      <ul class="list-unstyled m-0 small">
+        @for (it of items; track it; let i = $index; let last = $last) {
+          <li class="text-secondary">
+            <span class="dot"></span>{{ it }}
+          </li>
+        }
+      </ul>
+  </div>
+</div>

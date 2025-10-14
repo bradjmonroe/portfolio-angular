@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ContactService } from './contact.service';
-import { AnimatedSectionComponent } from "../../shared/animated-section/animated-section";
 
 @Component({
   selector: 'app-contact',
   standalone: true,
-  imports: [ReactiveFormsModule, AnimatedSectionComponent],
+  imports: [ReactiveFormsModule],
   templateUrl: './contact.html',
   styleUrls: ['./contact.scss']
 })

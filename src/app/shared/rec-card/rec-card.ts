@@ -10,7 +10,7 @@ export interface RecCategory {
 @Component({
   selector: 'app-rec-card',
   standalone: true,
-  imports: [NgFor, DecimalPipe],
+  imports: [DecimalPipe],
   templateUrl: './rec-card.html',
   styleUrl: './rec-card.scss'
 })
