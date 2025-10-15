@@ -11,4 +11,6 @@ import { LINKS } from '../../config/links';
 })
 export class Home {
   links = LINKS;
+  available = true;
+
 }

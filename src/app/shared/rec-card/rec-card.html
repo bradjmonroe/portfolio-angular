@@ -4,6 +4,11 @@
         <span class="index-badge">{{ index | number:'2.0' }}</span>
         <h6 class="mb-0">{{ title }}</h6>
       </div>
+      @if(subheader) {
+        <p class="card-subtitle text-secondary small mb-3">
+          {{ subheader }}
+        </p>
+      }
       <ul class="list-unstyled m-0 small">
         @for (it of items; track it; let i = $index; let last = $last) {
           <li class="text-secondary">

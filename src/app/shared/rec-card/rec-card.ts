@@ -4,6 +4,7 @@ import { Component, Input } from '@angular/core';
 export interface RecCategory {
   index: number;        // 1..n
   title: string;        // e.g. "Frontend"
+  subheader: string;    // e.g. "The basics"
   items: string[];      // bullet list
 }
 
@@ -17,5 +18,7 @@ export interface RecCategory {
 export class RecCard {
   @Input() index!: number;
   @Input() title!: string;
+  @Input() subheader!: string;
   @Input() items: string[] = [];
+
 }

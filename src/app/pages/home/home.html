@@ -1,5 +1,18 @@
 <section class="container text-center py-5 my-4">
-    <span class="badge text-bg-dark border">• Available for new projects</span>
+    <span
+      class="badge border text-uppercase small px-3 py-2"
+      [class.bg-success-subtle]="available"
+      [class.text-success]="available"
+      [class.border-success]="available"
+      [class.bg-danger-subtle]="!available"
+      [class.text-danger]="!available"
+      [class.border-danger]="!available"
+    >
+      • {{ available
+          ? 'Available for new projects'
+          : 'Not available for work but feel free to connect' }}
+    </span>
+
     <h1 class="display-3 fw-semibold mt-3">Hi, I’m <span class="text-gradient">Brad Monroe</span></h1>
     <p class="text-secondary">&lt; Full Stack Developer /&gt;</p>
     <p class="lead text-secondary mx-auto" style="max-width: 720px;">
@@ -10,7 +23,7 @@
       <a routerLink="/projects" class="btn btn-outline-secondary">View Work</a>
     </div>
     <div class="mt-4 text-secondary">
-      <div class="mt-4 text-secondary">
+      <div class="mt-4 text-secondary fs-3">
         <a [href]="links.github" target="_blank" rel="noopener">
           <i class="bi bi-github me-3"></i>
         </a>

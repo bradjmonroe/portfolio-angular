@@ -1,24 +1,73 @@
-<section class="container py-4">
-    <h2 class="mb-4">Projects</h2>
-    <div class="row g-4">
-      @for (p of projects; track p; let i = $index; let last = $last) {
-          <div class="col-12 col-sm-6 col-lg-4">
-            <div class="card h-100">
-              <img [src]="p.image || 'https://placehold.co/600x400'" class="card-img-top" alt="">
-              <div class="card-body">
-                <h5 class="card-title mb-1">{{ p.title }}</h5>
-                <p class="card-text text-secondary small">{{ p.summary }}</p>
-                <div class="d-flex gap-2">
-                  <a [routerLink]="['/projects', p.slug]" class="btn btn-sm btn-primary">Details</a>
-                  @if (p.repo) {
-                    <a [href]="p.repo" target="_blank" class="btn btn-sm btn-outline-secondary">
-                      <i class="bi bi-github me-1"></i>Code
-                    </a>
-                  }
+<section class="container py-5">
+  <div class="text-center mb-4">
+    <span class="badge bg-transparent border text-uppercase small">Projects</span>
+    <h2 class="display-6 fw-semibold mt-3">Portfolio of Work</h2>
+    <p class="text-secondary">A quick list of my existing, public work.</p>
+  </div>
+
+  <div class="row g-4">
+    @for (p of projects; track p; let i = $index) {
+      <div class="col-12 col-sm-6 col-lg-4">
+        <div class="card h-100">
+          <img [src]="p.image || 'https://placehold.co/600x400'" class="card-img-top" alt="">
+          <div class="card-body">
+            <h5 class="card-title mb-1">{{ p.title }}</h5>
+
+            <span
+              class="badge text-uppercase small px-3 py-2"
+              [class.bg-secondary-subtle]="p.progress === 'Ideation'"
+              [class.text-secondary]="p.progress === 'Ideation'"
+              [class.bg-primary-subtle]="p.progress === 'In Development'"
+              [class.text-primary]="p.progress === 'In Development'"
+              [class.bg-warning-subtle]="p.progress === 'In Testing'"
+              [class.text-warning]="p.progress === 'In Testing'"
+              [class.bg-danger-subtle]="p.progress === 'On Hold'"
+              [class.text-danger]="p.progress === 'On Hold'"
+              [class.bg-success-subtle]="p.progress === 'Finished'"
+              [class.text-success]="p.progress === 'Finished'">
+              {{ p.progress }}
+            </span>
+
+            <p class="card-text text-secondary small">{{ p.summary }}</p>
+
+            <div class="d-flex flex-wrap gap-2">
+              <button
+              type="button"
+              class="btn btn-sm btn-primary d-flex align-items-center gap-1"
+              data-bs-toggle="collapse"
+              [attr.data-bs-target]="'#desc-' + i"
+              [attr.aria-controls]="'desc-' + i"
+              aria-expanded="false">
+              <i class="bi"
+                [class.bi-plus]="!isExpanded(i)"
+                [class.bi-dash]="isExpanded(i)"></i>
+              Details
+            </button>
+
+              @if (p.repo) {
+                <a [href]="p.repo" target="_blank" class="btn btn-sm btn-outline-secondary">
+                  <i class="bi bi-github me-1"></i>Code
+                </a>
+              }
+
+              <!--<a [routerLink]="['/projects', p.slug]" class="btn btn-sm btn-outline-primary">View Page</a>-->
+            </div>
+            <!-- Per-card accordion -->
+            <div class="accordion accordion-flush mt-3" [id]="'acc-' + i">
+              <div class="accordion-item">
+                <div class="accordion-collapse collapse"
+                    [id]="'desc-' + i"
+                    [attr.data-bs-parent]="'#acc-' + i">
+                  <div class="accordion-body text-secondary small">
+                    {{ p.description || 'No additional details available.' }}
+                  </div>
                 </div>
               </div>
             </div>
+            <!-- /Accordion -->
           </div>
-        }
-    </div>
-  </section>
+        </div>
+      </div>
+    }
+  </div>
+</section>

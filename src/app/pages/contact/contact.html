@@ -27,7 +27,7 @@
           <span class="icon-pill"><i class="bi bi-geo-alt"></i></span>
           <div>
             <div class="text-secondary small">Location</div>
-            <div>Available Remotely</div>
+            <div>Available Remotely (EST)</div>
           </div>
         </div>
       </div>
@@ -67,18 +67,31 @@
 
           <div class="mb-4">
             <label class="form-label">Message</label>
-            <textarea class="form-control" rows="6" formControlName="message" placeholder="Tell me about your project..."></textarea>
-            @if (form.controls['email'].touched && form.controls['email'].invalid) {
+            <textarea class="form-control" rows="6" formControlName="message"
+                      placeholder="Tell me about your project..."></textarea>
+            @if (form.controls['message'].touched && form.controls['message'].invalid) {
               <div class="invalid-msg">Please provide at least 10 characters.</div>
             }
           </div>
 
+          <div class="visually-hidden" aria-hidden="true">
+            <label>Company</label>
+            <input type="text" tabindex="-1" autocomplete="off" formControlName="hp" />
+          </div>
+
+          <div class="mt-3">
+            <div class="cf-turnstile" data-sitekey="TURNSTILE_SECRET"
+                data-callback="onTurnstileSuccess"></div>
+          </div>
+
           <button class="btn btn-primary btn-lg w-100" type="submit" [disabled]="form.invalid || sending">
             @if (sending) {
-              <i class="bi bi-arrow-repeat me-2"></i>
-              {{ sending ? 'Sending...' : 'Send Message' }}
+              <i class="bi bi-arrow-repeat me-2"></i> Sending...
+            } @else {
+              Send Message
             }
           </button>
+
 
           @if (sent) {
             <div class="alert alert-success mt-3 mb-0 py-2 small">
