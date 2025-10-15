@@ -1,12 +1,11 @@
 [build]
-  command = "ng build --configuration production"
+  command = "npx ng build --configuration production"
   publish = "dist/portfolio/browser"
   functions = "netlify/functions"
 
 [build.environment]
   NODE_VERSION = "20"
 
-# SPA fallback
 [[redirects]]
   from = "/*"
   to = "/index.html"
