@@ -17,14 +17,14 @@ export class ProjectsService {
   list(): Project[] {
     return [
       {
-        title: 'Task Manager',
+        title: 'Personal Task Tracker',
         progress: 'Finished',
         slug: 'slug-one',
         image: 'assets/imgs/task-list.jpg',
-        summary: 'A full-stack task management web app demonstrating secure authentication, clean architecture, and RESTful design.',
+        summary: 'A full-stack To-Do Task Tracker web app demonstrating secure authentication, clean architecture, and RESTful design.',
         repo: 'https://github.com/bradjmonroe/task-manager',
         description: `
-          This Task Manager is a .NET Core web application designed to showcase a modern full-stack workflow within a compact, reviewable codebase.
+          This Personal Task Tracker is a .NET Core web application designed to showcase a modern full-stack workflow within a compact, reviewable codebase.
           It features JWT-based authentication, Entity Framework Core with SQLite for persistence, and a modular architecture that emphasizes clarity and scalability.
           The project demonstrates CRUD operations, authentication flows, and reusable UI components for managing daily tasks efficiently.
         `

@@ -6,16 +6,22 @@
   </div>
 
   <!-- category cards -->
-  <div class="skill-grid mb-5">
+  <div class="row g-4 mb-3">
     @for (c of categories; track c; let i = $index) {
-      <app-rec-card
-        [index]="c.index"
-        [title]="c.title"
-        [subheader]="c.subheader"
-        [items]="c.items">
-      </app-rec-card>
+      <div
+      [class]="colClass(i, categories.length) + ' d-flex'"
+      >
+        <app-rec-card
+          class="w-100 h-100"
+          [index]="c.index"
+          [title]="c.title"
+          [subheader]="c.subheader"
+          [items]="c.items">
+        </app-rec-card>
+      </div>
     }
   </div>
+
 
   <!-- process bar -->
   <div class="process container-sm px-0">
