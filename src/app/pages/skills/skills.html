@@ -28,7 +28,7 @@
     <div class="inner d-flex flex-wrap justify-content-center gap-3 p-4 border rounded">
       @for (s of steps; track s; let i = $index; let last = $last) {
         <ng-container>
-          <button class="btn btn-outline-primary btn-sm">{{ s }}</button>
+          <button [name]="'step'+ i" class="btn btn-outline-primary btn-sm">{{ s }}</button>
           @if (!last) { <span class="arrow">→</span> }
         </ng-container>
       }

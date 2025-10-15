@@ -19,18 +19,18 @@
       I build exceptional digital experiences that merge innovative design with robust functionality.
     </p>
     <div class="d-flex gap-3 justify-content-center mt-3">
-      <a routerLink="/contact" class="btn btn-primary">Get in Touch</a>
-      <a routerLink="/projects" class="btn btn-outline-secondary">View Work</a>
+      <a name="getInTouchLink" routerLink="/contact" class="btn btn-primary">Get in Touch</a>
+      <a name="projectsLink" routerLink="/projects" class="btn btn-outline-secondary">View Work</a>
     </div>
     <div class="mt-4 text-secondary">
       <div class="mt-4 text-secondary fs-3">
-        <a [href]="links.github" target="_blank" rel="noopener">
+        <a [href]="links.github" name="github" target="_blank" rel="noopener">
           <i class="bi bi-github me-3"></i>
         </a>
-        <a [href]="links.linkedin" target="_blank" rel="noopener">
+        <a [href]="links.linkedin" name="linkedin" target="_blank" rel="noopener">
           <i class="bi bi-linkedin me-3"></i>
         </a>
-        <a [href]="links.email">
+        <a [href]="links.email" name="email">
           <i class="bi bi-envelope"></i>
         </a>
       </div>

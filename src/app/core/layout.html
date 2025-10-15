@@ -1,15 +1,15 @@
 <nav class="navbar navbar-expand-lg border-bottom sticky-top">
     <div class="container">
       <a class="navbar-brand fw-bold" routerLink="/">BM</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav">
+      <button class="navbar-toggler" type="button" name="navbarToggle" data-bs-toggle="collapse" data-bs-target="#nav">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div id="nav" class="collapse navbar-collapse">
         <ul class="navbar-nav ms-auto align-items-lg-center gap-2">
-          <li class="nav-item"><a class="nav-link" routerLink="/projects">Projects</a></li>
-          <li class="nav-item"><a class="nav-link" routerLink="/skills">Skills</a></li>
-          <li class="nav-item"><a class="nav-link" routerLink="/about">About</a></li>
-          <li class="nav-item"><a class="nav-link" routerLink="/contact">Contact</a></li>
+          <li class="nav-item"><a name="projectLink" class="nav-link" routerLink="/projects">Projects</a></li>
+          <li class="nav-item"><a name="skillsLink" class="nav-link" routerLink="/skills">Skills</a></li>
+          <li class="nav-item"><a name="aboutLink" class="nav-link" routerLink="/about">About</a></li>
+          <li class="nav-item"><a name="contactLink" class="nav-link" routerLink="/contact">Contact</a></li>
           <li class="nav-item">
             <select #themeSel class="form-select form-select-sm w-auto"
                     (change)="setTheme(themeSel.value)">
@@ -19,7 +19,7 @@
             </select>
           </li>
           <li class="nav-item">
-            <a class="btn btn-primary ms-lg-2" routerLink="/contact">Get in Touch</a>
+            <a name="getInTouchLink" class="btn btn-primary ms-lg-2" routerLink="/contact">Get in Touch</a>
           </li>
         </ul>
       </div>

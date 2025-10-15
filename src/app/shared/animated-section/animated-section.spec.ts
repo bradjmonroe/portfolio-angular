@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AnimatedSection } from './animated-section';
+import { AnimatedSectionComponent } from './animated-section';
 
 describe('AnimatedSection', () => {
-  let component: AnimatedSection;
-  let fixture: ComponentFixture<AnimatedSection>;
+  let component: AnimatedSectionComponent;
+  let fixture: ComponentFixture<AnimatedSectionComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AnimatedSection]
+      imports: [AnimatedSectionComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(AnimatedSection);
+    fixture = TestBed.createComponent(AnimatedSectionComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

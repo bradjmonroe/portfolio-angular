@@ -17,7 +17,7 @@
           <span class="icon-pill"><i class="bi bi-envelope"></i></span>
           <div>
             <div class="text-secondary small">Email</div>
-            <a class="link-light" href="mailto:links.email">links.email</a>
+            <a class="link-light" name="skillsLink" [href]="'mailto:'+ links.email">{{links.email}}</a>
           </div>
         </div>
       </div>
@@ -84,7 +84,7 @@
                 data-callback="onTurnstileSuccess"></div>
           </div>
 
-          <button class="btn btn-primary btn-lg w-100" type="submit" [disabled]="form.invalid || sending">
+          <button class="btn btn-primary btn-lg w-100" name="submitEmail" type="submit" [disabled]="form.invalid || sending">
             @if (sending) {
               <i class="bi bi-arrow-repeat me-2"></i> Sending...
             } @else {

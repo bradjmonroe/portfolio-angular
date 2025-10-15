@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ContactService } from './contact.service';
+import { LINKS } from '../../config/links';
 
 @Component({
   selector: 'app-contact',
@@ -14,6 +15,7 @@ export class Contact implements OnInit {
   sending = false;
   sent = false;
   startedAt = 0; // time-trap
+  links = LINKS;
 
   private onTurnstile = (e: Event) => {
     const token = (e as CustomEvent<string>).detail;
