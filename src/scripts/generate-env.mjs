@@ -1,12 +1,60 @@
-import { writeFileSync, mkdirSync } from 'fs';
+// scripts/generate-env.mjs
+import { writeFileSync, mkdirSync, readFileSync } from 'node:fs';
+import { resolve, dirname } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
-const email = process.env.EMAIL || 'bradleyjmonroe@gmail.com';
-mkdirSync('src/env', { recursive: true });
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
-const content = `export const environment = {
+// 1) Locate and read angular.json from the project root
+const angularJsonPath = resolve(__dirname, '..', '..', 'angular.json');
+const angular = JSON.parse(readFileSync(angularJsonPath, 'utf8'));
+const projectRoot = dirname(angularJsonPath);
+
+// 2) Find a project with production fileReplacements
+const [, project] =
+  Object.entries(angular.projects).find(([, p]) =>
+    p.architect?.build?.configurations?.production?.fileReplacements
+  ) ?? [];
+
+if (!project) {
+  console.error('[generate-env] Could not find production.fileReplacements in angular.json');
+  process.exit(1);
+}
+
+const prodCfg = project.architect.build.configurations.production;
+const fr = prodCfg.fileReplacements?.[0];
+
+if (!fr?.replace || !fr?.with) {
+  console.error('[generate-env] production.fileReplacements is missing/malformed');
+  process.exit(1);
+}
+
+// 3) Resolve target dir from the project root (NOT from src/)
+const replaceAbs = resolve(projectRoot, fr.replace); // e.g. <root>/src/environments/environment.ts
+const targetDir  = dirname(replaceAbs);             // e.g. <root>/src/environments
+
+mkdirSync(targetDir, { recursive: true });
+
+// 4) Values
+const email = process.env.EMAIL || 'hello@bradmonroe.dev';
+
+// 5) Write files
+const devEnv = `export const environment = {
+  production: false,
+  email: '${email}'
+};
+`;
+
+const prodEnv = `export const environment = {
   production: true,
   email: '${email}'
 };
 `;
-writeFileSync('src/env/environment.prod.ts', content);
-console.log('Wrote src/env/environment.prod.ts with EMAIL:', email);
+
+writeFileSync(resolve(targetDir, 'environment.ts'), devEnv, 'utf8');
+writeFileSync(resolve(targetDir, 'environment.prod.ts'), prodEnv, 'utf8');
+
+console.log('[generate-env] Wrote:', resolve(targetDir, 'environment.ts'));
+console.log('[generate-env] Wrote:', resolve(targetDir, 'environment.prod.ts'));
+console.log('[generate-env] Target dir:', targetDir);

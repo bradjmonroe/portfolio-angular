@@ -1,4 +1,4 @@
-import { environment } from '../../env/environment';
+import { environment } from "../../environments/environment";
 
 export const LINKS = {
   github: 'https://github.com/bradjmonroe',
