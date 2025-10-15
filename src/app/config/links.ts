@@ -1,6 +1,7 @@
-// src/app/config/links.ts
+import { environment } from '../../env/environment';
+
 export const LINKS = {
   github: 'https://github.com/bradjmonroe',
   linkedin: 'https://www.linkedin.com/in/bradmonroe',
-  email: 'TO_EMAIL',
+  email: environment.email
 };

@@ -3,7 +3,7 @@ import type { Handler } from '@netlify/functions';
 
 const TURNSTILE_SECRET = process.env.TURNSTILE_SECRET || '';
 const RESEND_API_KEY   = process.env.RESEND_API_KEY || '';
-const TO_EMAIL         = process.env.TO_EMAIL || 'bradleyjmonroe@gmail.com';
+const EMAIL         = process.env.EMAIL || 'bradleyjmonroe@gmail.com';
 
 export const handler: Handler = async (event) => {
   if (event.httpMethod !== 'POST') {
@@ -46,7 +46,7 @@ export const handler: Handler = async (event) => {
     },
     body: JSON.stringify({
       from: 'Portfolio Contact <noreply@yourdomain.dev>',
-      to: [TO_EMAIL],
+      to: [EMAIL],
       subject: `New message from ${name}`,
       reply_to: email,
       text: `From: ${name} <${email}>\n\n${message}`,
