@@ -1,6 +1,6 @@
 [build]
   command = "npx ng build --configuration production"
-  publish = "dist/portfolio/browser"
+  publish = "dist/portfolio"
   functions = "netlify/functions"
 
 [build.environment]
