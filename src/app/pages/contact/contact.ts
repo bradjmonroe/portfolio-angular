@@ -46,9 +46,10 @@ export class Contact implements OnInit {
       if (window.turnstile?.render) {
         clearInterval(interval);
 
-        window.turnstile.render('#turnstile-widget', {
-          sitekey: environment.turnstileSecret,
+        window.turnstile.render(document.getElementById('turnstile-widget'), {
+          sitekey: this.env.turnstileSecret,
           callback: (token: string) => {
+            console.log('Turnstile token received:', token);
             this.form.get('turnstileToken')?.setValue(token);
           }
         });
@@ -57,7 +58,7 @@ export class Contact implements OnInit {
   }
 
   ngOnDestroy() {
-    window.turnstile?.remove?.('#turnstile-widget');
+    window.turnstile?.remove?.('turnstile-widget');
     window.removeEventListener('turnstile:solved', this.onTurnstile);
   }
 
@@ -82,7 +83,7 @@ export class Contact implements OnInit {
       this.sent = !!res.ok;
       if (res.ok) {
         this.form.reset();
-        window.turnstile?.reset?.('#turnstile-widget');
+        window.turnstile?.reset?.('turnstile-widget');
       }
     } finally {
       this.sending = false;
