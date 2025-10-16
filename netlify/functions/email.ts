@@ -5,9 +5,19 @@ const TURNSTILE_SECRET = process.env.TURNSTILE_SECRET || '';
 const RESEND_API_KEY   = process.env.RESEND_API_KEY || '';
 const EMAIL         = process.env.EMAIL || 'bradleyjmonroe@gmail.com';
 
+const CORS = {
+  'Access-Control-Allow-Origin': 'https://bradmonroe.dev',
+  'Access-Control-Allow-Methods': 'POST, OPTIONS',
+  'Access-Control-Allow-Headers': 'Content-Type'
+};
+
 export const handler: Handler = async (event) => {
+  if (event.httpMethod === 'OPTIONS') {
+    return { statusCode: 200, headers: CORS, body: '' };
+  }
+
   if (event.httpMethod !== 'POST') {
-    return json(405, { ok: false, error: 'Method not allowed' });
+    return { statusCode: 405, headers: CORS, body: JSON.stringify({ ok:false, error:'Method not allowed' }) };
   }
 
   let body: any = {};
@@ -60,7 +70,7 @@ export const handler: Handler = async (event) => {
     return json(502, { ok: false, error: 'Email failed', detail });
   }
 
-  return json(200, { ok: true });
+  return { statusCode: 200, headers: CORS, body: JSON.stringify({ ok:true }) };
 };
 
 function json(status: number, body: unknown) {
