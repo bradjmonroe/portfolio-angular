@@ -39,19 +39,22 @@ mkdirSync(targetDir, { recursive: true });
 // 4) Values
 const email = process.env.EMAIL || 'hello@bradmonroe.dev';
 const turnstileSecret = process.env.TURNSTILE_SECRET || 'NO_SECRET';
+const turnstileSiteKey = process.env.TURNSTILE_SITE_KEY || 'NO_SITE_KEY';
 
 // 5) Write files
 const devEnv = `export const environment = {
   production: false,
   email: '${email}',
-  turnstileSecret: '${turnstileSecret}'
+  turnstileSecret: '${turnstileSecret}',
+  turnstileSiteKey: '${turnstileSiteKey}'
 };
 `;
 
 const prodEnv = `export const environment = {
   production: true,
   email: '${email}',
-  turnstileSecret: '${turnstileSecret}'
+  turnstileSecret: '${turnstileSecret}',
+  turnstileSiteKey: '${turnstileSiteKey}'
 };
 `;
 
