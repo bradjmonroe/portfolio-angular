@@ -4,6 +4,10 @@ import { ContactService } from './contact.service';
 import { LINKS } from '../../config/links';
 import { environment } from '../../../environments/environment';
 
+declare global {
+  interface Window { turnstile: any; }
+}
+
 @Component({
   selector: 'app-contact',
   standalone: true,
@@ -34,12 +38,26 @@ export class Contact implements OnInit {
       hp: [''],
       turnstileToken: ['']
     });
+  }
 
-    // listen for the browser event fired from index.html
-    window.addEventListener('turnstile:solved', this.onTurnstile);
+  ngAfterViewInit() {
+    // Wait until the Turnstile script is ready
+    const interval = setInterval(() => {
+      if (window.turnstile?.render) {
+        clearInterval(interval);
+
+        window.turnstile.render('#turnstile-widget', {
+          sitekey: environment.turnstileSecret,
+          callback: (token: string) => {
+            this.form.get('turnstileToken')?.setValue(token);
+          }
+        });
+      }
+    }, 200);
   }
 
   ngOnDestroy() {
+    window.turnstile?.remove?.('#turnstile-widget');
     window.removeEventListener('turnstile:solved', this.onTurnstile);
   }
 
@@ -62,7 +80,10 @@ export class Contact implements OnInit {
       } as any);
 
       this.sent = !!res.ok;
-      if (res.ok) this.form.reset();
+      if (res.ok) {
+        this.form.reset();
+        window.turnstile?.reset?.('#turnstile-widget');
+      }
     } finally {
       this.sending = false;
       this.startedAt = Date.now();
