@@ -38,17 +38,20 @@ mkdirSync(targetDir, { recursive: true });
 
 // 4) Values
 const email = process.env.EMAIL || 'hello@bradmonroe.dev';
+const turnstileSecret = process.env.TURNSTILE_SECRET || 'NO_SECRET';
 
 // 5) Write files
 const devEnv = `export const environment = {
   production: false,
-  email: '${email}'
+  email: '${email}',
+  turnstileSecret: '${turnstileSecret}'
 };
 `;
 
 const prodEnv = `export const environment = {
   production: true,
-  email: '${email}'
+  email: '${email}',
+  turnstileSecret: '${turnstileSecret}'
 };
 `;
 

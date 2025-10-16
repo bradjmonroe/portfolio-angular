@@ -80,7 +80,7 @@
           </div>
 
           <div class="mt-3">
-            <div class="cf-turnstile" data-sitekey="TURNSTILE_SECRET"
+            <div class="cf-turnstile" [attr.data-sitekey]="env.turnstileSecret"
                 data-callback="onTurnstileSuccess"></div>
           </div>
 
