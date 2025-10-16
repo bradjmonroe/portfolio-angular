@@ -46,13 +46,18 @@ export class Contact implements OnInit {
       if (window.turnstile?.render) {
         clearInterval(interval);
 
-        window.turnstile.render(document.getElementById('turnstile-widget'), {
-          sitekey: this.env.turnstileSecret,
-          callback: (token: string) => {
-            console.log('Turnstile token received:', token);
-            this.form.get('turnstileToken')?.setValue(token);
-          }
-        });
+        const ts = document.getElementById('turnstile-widget');
+        if (ts) {
+          window.turnstile.render(ts, {
+            sitekey: this.env.turnstileSecret,
+            callback: (token: string) => {
+              console.log('Turnstile token received:', token);
+              this.form.get('turnstileToken')?.setValue(token);
+            }
+          });
+        } else {
+          console.warn('Turnstile container not found in DOM');
+        }
       }
     }, 200);
   }
