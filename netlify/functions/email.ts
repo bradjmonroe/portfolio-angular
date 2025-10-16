@@ -55,7 +55,7 @@ export const handler: Handler = async (event) => {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-      from: 'Portfolio Contact <noreply@yourdomain.dev>',
+      from: 'Portfolio Contact <noreply@bradmonroe.dev>',
       to: [EMAIL],
       subject: `New message from ${name}`,
       reply_to: email,
