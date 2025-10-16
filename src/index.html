@@ -10,10 +10,9 @@
 <body>
   <app-root></app-root>
   <script>
-    function onTurnstileSuccess(token) {
-      // Broadcast event the Angular app can listen for
+    window.onTurnstileSuccess = function (token) {
       window.dispatchEvent(new CustomEvent('turnstile:solved', { detail: token }));
-    }
+    };
   </script>
   <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 </body>
