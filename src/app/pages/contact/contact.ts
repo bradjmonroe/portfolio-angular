@@ -23,6 +23,8 @@ export class Contact implements OnInit {
   links = LINKS;
   env = environment;
 
+  private widgetId: string | null = null;
+
   private onTurnstile = (e: Event) => {
     const token = (e as CustomEvent<string>).detail;
     this.form.get('turnstileToken')?.setValue(token);
@@ -48,7 +50,7 @@ export class Contact implements OnInit {
 
         const ts = document.getElementById('turnstile-widget');
         if (ts) {
-          window.turnstile.render(ts, {
+          this.widgetId = window.turnstile.render(ts, {
             sitekey: this.env.turnstileSiteKey,
             callback: (token: string) => {
               console.log('Turnstile token received:', token);
@@ -88,7 +90,7 @@ export class Contact implements OnInit {
       this.sent = !!res.ok;
       if (res.ok) {
         this.form.reset();
-        window.turnstile?.reset?.('turnstile-widget');
+        if (this.widgetId) window.turnstile.reset(this.widgetId);
       }
     } finally {
       this.sending = false;
