@@ -49,7 +49,7 @@ export class Contact implements OnInit {
         const ts = document.getElementById('turnstile-widget');
         if (ts) {
           window.turnstile.render(ts, {
-            sitekey: this.env.turnstileSecret,
+            sitekey: this.env.turnstileSiteKey,
             callback: (token: string) => {
               console.log('Turnstile token received:', token);
               this.form.get('turnstileToken')?.setValue(token);

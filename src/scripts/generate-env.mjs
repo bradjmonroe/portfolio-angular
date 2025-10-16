@@ -45,7 +45,6 @@ const turnstileSiteKey = process.env.TURNSTILE_SITE_KEY || 'NO_SITE_KEY';
 const devEnv = `export const environment = {
   production: false,
   email: '${email}',
-  turnstileSecret: '${turnstileSecret}',
   turnstileSiteKey: '${turnstileSiteKey}'
 };
 `;
@@ -53,7 +52,6 @@ const devEnv = `export const environment = {
 const prodEnv = `export const environment = {
   production: true,
   email: '${email}',
-  turnstileSecret: '${turnstileSecret}',
   turnstileSiteKey: '${turnstileSiteKey}'
 };
 `;
