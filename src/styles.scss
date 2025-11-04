@@ -59,6 +59,11 @@ $surface-light:  rgba(255, 255, 255, 0.03);
   --glass-border: rgba(0, 0, 0, 0.06);
   --glass-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
   .badge { border-color: rgba(0,0,0,0.08); }
+
+  .link-light {
+    color: $primary !important;
+    text-decoration-color: $primary !important;
+  }
 }
 
 /* ==========================================================================
