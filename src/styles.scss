@@ -50,6 +50,7 @@ $surface-light:  rgba(255, 255, 255, 0.03);
   --glass-sat:   180%;
   --glass-border: rgba(148, 163, 184, 0.15);
   --glass-shadow: 0 2px 12px rgba(0, 0, 0, 0.35);
+  --brand-color: $body-color;
 }
 
 :root[data-bs-theme="light"] {
@@ -58,11 +59,16 @@ $surface-light:  rgba(255, 255, 255, 0.03);
   --glass-sat:   140%;
   --glass-border: rgba(0, 0, 0, 0.06);
   --glass-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  --brand-color: $primary;
   .badge { border-color: rgba(0,0,0,0.08); }
 
   .link-light {
     color: $primary !important;
     text-decoration-color: $primary !important;
+  }
+
+  .navbar .navbar-brand {
+    color: var(--brand-color) !important;
   }
 }
 
@@ -76,6 +82,22 @@ $surface-light:  rgba(255, 255, 255, 0.03);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+}
+
+/* Navbar Brand */
+.navbar-brand.brand {
+  color: var(--brand-color);
+  display: inline-flex;
+  align-items: center;
+}
+
+.brand-icon {
+  display: inline-block;
+  width: 28px;
+  height: 28px;
+  background-color: currentColor;
+  -webkit-mask: url('/assets/imgs/svg/brad_vector.svg') no-repeat center / contain;
+  mask: url('/assets/imgs/svg/brad_vector.svg') no-repeat center / contain;
 }
 
 /* Subtle grid page background */

@@ -8,6 +8,7 @@ export interface AboutFeature {
 
 @Component({
   selector: 'app-square-card',
+  standalone: true,
   imports: [],
   templateUrl: './square-card.html',
   styleUrl: './square-card.scss'
