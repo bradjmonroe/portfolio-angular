@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ContactService } from './contact.service';
 import { LINKS } from '../../config/links';
@@ -15,45 +15,43 @@ declare global {
   templateUrl: './contact.html',
   styleUrls: ['./contact.scss']
 })
-export class Contact implements OnInit {
+export class Contact implements OnInit, AfterViewInit, OnDestroy {
   form!: FormGroup;
   sending = false;
   sent = false;
+  error= false;
   startedAt = 0; // time-trap
   links = LINKS;
   env = environment;
 
   private widgetId: string | null = null;
+  private tsInterval: ReturnType<typeof setInterval> | null = null;
 
-  private onTurnstile = (e: Event) => {
-    const token = (e as CustomEvent<string>).detail;
-    this.form.get('turnstileToken')?.setValue(token);
-  };
 
   constructor(private fb: FormBuilder, private svc: ContactService) {}
 
   ngOnInit() {
+    this.startedAt = Date.now();
     this.form = this.fb.group({
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       message: ['', [Validators.required, Validators.minLength(10)]],
       hp: [''],
-      turnstileToken: ['']
+      turnstileToken: ['', Validators.required]
     });
   }
 
   ngAfterViewInit() {
     // Wait until the Turnstile script is ready
-    const interval = setInterval(() => {
+    this.tsInterval = setInterval(() => {
       if (window.turnstile?.render) {
-        clearInterval(interval);
+        clearInterval(this.tsInterval!);
 
         const ts = document.getElementById('turnstile-widget');
         if (ts) {
           this.widgetId = window.turnstile.render(ts, {
             sitekey: this.env.turnstileSiteKey,
             callback: (token: string) => {
-              console.log('Turnstile token received:', token);
               this.form.get('turnstileToken')?.setValue(token);
             }
           });
@@ -65,8 +63,10 @@ export class Contact implements OnInit {
   }
 
   ngOnDestroy() {
-    window.turnstile?.remove?.('turnstile-widget');
-    window.removeEventListener('turnstile:solved', this.onTurnstile);
+    if (this.tsInterval) {
+      clearInterval(this.tsInterval);
+    }
+    window.turnstile?.remove?.(this.widgetId);
   }
 
   async submit() {
@@ -85,9 +85,10 @@ export class Contact implements OnInit {
         message: this.form.value.message,
         turnstileToken: this.form.value.turnstileToken,
         elapsedMs: elapsed
-      } as any);
+      });
 
       this.sent = !!res.ok;
+      this.error = !res.ok;
       if (res.ok) {
         this.form.reset();
         if (this.widgetId) window.turnstile.reset(this.widgetId);
